@@ -48,11 +48,56 @@
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
-# problem
-# Create two variable(name, school).
-# Make it so that the following content is displayed when run.
+# input('text' or value or variabe)
+# Displays 'text' or the value of the variable, then waits for keyboard input until Enter is pressed.
+# 'text' or variable can be left out
+# variable = input('text' or variable)
+# Usually used in this format, without variable it the input value is not saved
+# input() always saves the value as a str data type
 
-name = "Eiley"
-school = 'YISS'
-print("Hello, my name is", name)        # next time add a comma after the " and then write the variable
-print("I am currently a 5th-grade student at", school)
+# var1 = 2
+# var2 = input("insert anything : ") 
+# print(var2)   
+# print(type(var2))
+
+# var2 = int(var2)
+# print(type(var2))
+
+# sum = var1 + var2
+# print(sum)
+
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+ # Type casting
+# str(variable or value)    => converts variable or value to str data type 
+# float(variable or value)  => converts variable or value to float data type 
+#int(variable or value) => converts variable or value to int data type
+# Just using them in calculations doesn't change the original variable's data type 
+# To change the original variable's data type, save it back into the variable ( ex. a = int(a))
+
+# var1 = 2
+# var2 = '31'
+# result = var1 + int(var2)   # saves var1 + var2 converted to int in result
+# print(result)
+# print(type(var2))       # Prints the data type of var2 which is str
+# var2 = int(var2)        # converts var2 to int and saves it back in var2
+# print(type(var2))       # prints the new data type of var2 
+
+
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+ 
+print('Hello enter your name.')   
+name = input()      # I have to do this not put var or this # var2 = input("insert anything : ") sadly :(
+
+print("welcome", name, ", Enter your age")  # do this do that
+age = input()
+age = int(age)
+year = 2025 - age
+
+print("you were born in", year,"! Enter your height.") 
+height = int(input())
+two_m = 200 - height
+
+print("There are", two_m, "cm left unil 2m" )
+
+
