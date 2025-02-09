@@ -86,10 +86,10 @@
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
  
-print('Hello enter your name.')   
+print('Hello, enter your name.')   
 name = input()      # I have to do this not put var or this # var2 = input("insert anything : ") sadly :(
 
-print("welcome", name, ", Enter your age")  # do this do that
+print("welcome", name, ", enter your age")  # do this do that
 age = input()
 age = int(age)
 year = 2025 - age
