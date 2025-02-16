@@ -86,18 +86,38 @@
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
  
-print('Hello, enter your name.')   
-name = input()      # I have to do this not put var or this # var2 = input("insert anything : ") sadly :(
+# print('Hello, enter your name.')   
+# name = input()      # I have to do this not put var or this # var2 = input("insert anything : ") sadly :(
 
-print("welcome", name, ", enter your age")  # do this do that
-age = input()
-age = int(age)
-year = 2025 - age
+# print("welcome", name, ", enter your age")  # do this do that
+# age = input()
+# age = int(age)
+# year = 2025 - age
 
-print("you were born in", year,"! Enter your height.") 
-height = int(input())
-two_m = 200 - height
+# print("you were born in", year,"! Enter your height.") 
+# height = int(input())
+# two_m = 200 - height
 
-print("There are", two_m, "cm left unil 2m" )
+# print("There are", two_m, "cm left unil 2m" )
 
 
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+
+# +     add 
+# -     subtract
+# *     mulitply 
+# /     divide (result is a flock)
+# //    integer division (result is a int) 
+# %     modulus (remainder)
+# **    exponet (power)
+
+a = 10
+b = 3
+print(a+b)
+print(a-b)
+print(a*b)
+print(a/b)
+print(a//b)
+print(a%b)
+print(a**b)
