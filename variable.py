@@ -68,7 +68,7 @@
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
- # Type casting
+# Type casting
 # str(variable or value)    => converts variable or value to str data type 
 # float(variable or value)  => converts variable or value to float data type 
 #int(variable or value) => converts variable or value to int data type
@@ -112,12 +112,12 @@
 # %     modulus (remainder)
 # **    exponet (power)
 
-a = 10
-b = 3
-print(a+b)
-print(a-b)
-print(a*b)
-print(a/b)
-print(a//b)
-print(a%b)
-print(a**b)
+# a = 10
+# b = 3
+# print(a+b)
+# print(a-b)
+# print(a*b)
+# print(a/b)
+# print(a//b)
+# print(a%b)
+# print(a**b)
