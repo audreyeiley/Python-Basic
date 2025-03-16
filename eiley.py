@@ -19,5 +19,5 @@ If you catch the fish then it will be game over, and as you grab the trash you w
 """
 st.write(description)
 
-# name = st.text_input("Continue the story")
-# st.write(name)
+
+st.image("1.png")

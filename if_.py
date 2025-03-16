@@ -98,42 +98,41 @@
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
 
-print("Enter two number")
-number1 = int(input())
-number2 = int(input())
+# print("Enter two numbers")
+# number1 = int(input())
+# number2 = int(input())
 
-print("What calculation would you like to run?") 
-print("1: Multiply, 2: Divide, 3: Add, 4: subtract ")
-number3 = int(input())
+# print("What calculation would you like to run?") 
+# print("1: Multiply, 2: Divide, 3: Add, 4: subtract ")
+# number3 = int(input())
 
-if(number3 == 1 ) :
-    print("selected multiply,", number1, "*", number2, "=", number1*number2)
-elif(number3 == 2) :
-    print("selected divide,", number1, "/", number2, "=", number1//number2)
-elif(number3 == 3) :
-    print("selected add,", number1, "+", number2, "=", number1+number2) 
-elif(number3 ==3 ) :
-    print("selected subtract,", number1, "-", number2, "-", number1-number2)
+# if(number3 == 1 ) :
+#     print("selected multiply,", number1, "*", number2, "=", number1*number2)
+# elif(number3 == 2) :
+#     print("selected divide,", number1, "/", number2, "=", number1//number2)
+# elif(number3 == 3) :
+#     print("selected add,", number1, "+", number2, "=", number1+number2) 
+# elif(number3 ==3 ) :
+#     print("selected subtract,", number1, "-", number2, "-", number1-number2)
 
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
 
-# Nested if 
-# if can be nested
 
-# age =int(input("Enter your age"))
-# is_member = input("Are you a member? (Yes or no):")
 
-# if(age >= 18) :
-#     if(is_member == "yes") :
-#         print("Welcome, Adult member!")
-#     else :
-#         print("Adult non-member, please sign up.") 
-# else :
-#     if(is_member == "yes") :
-#         print("Welcome young member!") 
-#     else :
-#         print("Young non-member, please sign up.")
+age =int(input("Enter your age"))
+is_member = input("Are you a member? (Yes or no):")
+
+if(age >= 18) :
+    if(is_member == "yes") :
+        print("Welcome, Adult member!")
+    else :
+        print("Adult non-member, please sign up.") 
+else :
+    if(is_member == "yes") :
+        print("Welcome young member!") 
+    else :
+        print("Young non-member, please sign up.")
     
 
