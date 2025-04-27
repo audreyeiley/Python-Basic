@@ -32,7 +32,7 @@
 
 # problem : print perfect squares up to 10000 (print x*x)
 for i in range (1,101, 1 ) :
-    print(i*i)      # the answer is in the question, or the problem since x is not a variable use the variable as i.
+    print(i*i)      # the answer is in the question, or the problem since x is not a variable use the variable as i. And use maths when using or solving these kind of problems
 
 
 

@@ -121,18 +121,18 @@
 
 
 
-age =int(input("Enter your age"))
-is_member = input("Are you a member? (Yes or no):")
+# age =int(input("Enter your age"))
+# is_member = input("Are you a member? (Yes or no):")
 
-if(age >= 18) :
-    if(is_member == "yes") :
-        print("Welcome, Adult member!")
-    else :
-        print("Adult non-member, please sign up.") 
-else :
-    if(is_member == "yes") :
-        print("Welcome young member!") 
-    else :
-        print("Young non-member, please sign up.")
+# if(age >= 18) :
+#     if(is_member == "yes") :
+#         print("Welcome, Adult member!")
+#     else :
+#         print("Adult non-member, please sign up.") 
+# else :
+#     if(is_member == "yes") :
+#         print("Welcome young member!") 
+#     else :
+#         print("Young non-member, please sign up.")
     
 
