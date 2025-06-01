@@ -15,10 +15,13 @@ def get_base64_image(image_path):
 # Path to the image files.
 image_path_1 = "1.png"  # Path to the first image (initial image)
 image_path_2 = "2.png"  # Path to the second image (image that replaces the first one)
+net_image_path = "net.png"
+
 
 # Encode the images to base64 strings.
 encoded_image_1 = get_base64_image(image_path_1)
 encoded_image_2 = get_base64_image(image_path_2)
+encoded_net = get_base64_image(net_image_path)
 
 html_code = f"""
 <!DOCTYPE html>
@@ -43,13 +46,12 @@ html_code = f"""
       display: block;
     }}
     #net {{
-      position: absolute;
-      top: 200px;
-      left: 100px;
-      width: 60px;
-      display: none;
-      z-index: 2;
-    }}
+  position: absolute;
+  width: 60px;
+  display: none;
+  z-index: 2;
+  pointer-events: none;  /* So it doesn't block clicks */
+}}
     /* Clickable boxes */
     #multi-box-1 {{ top: 80px; left: 240px; width: 20px; height: 55px; }}
     #multi-box-2 {{ top: 260px; left: 320px; width: 50px; height: 30px; }}
@@ -71,7 +73,7 @@ html_code = f"""
 <body>
   <div class="container">
     <img id="image" src="data:image/png;base64,{encoded_image_1}" width="600" alt="Clickable Image">
-    <img id="net" src="net.png" alt="Net Image">
+    <img id="net" src="data:image/png;base64,{encoded_net}" alt="Net Image">
     
     <!-- First box to change image -->
     <div class="clickable-area" id="clickable-area" onclick="changeImage()"></div>
@@ -95,22 +97,34 @@ html_code = f"""
   </div>
 
   <script>
-    function changeImage() {{
-      document.getElementById('image').src = "data:image/png;base64,{encoded_image_2}";
-      document.getElementById('clickable-area').style.display = 'none';
-      document.getElementById('net').style.display = 'block';
+  function changeImage() {{
+    document.getElementById('image').src = "data:image/png;base64,{encoded_image_2}";
+    document.getElementById('clickable-area').style.display = 'none';
+    document.getElementById('net').style.display = 'block';
 
-      for (let i = 1; i <= 15; i++) {{
-        const box = document.getElementById(`multi-box-${{i}}`);
-        if (box) {{
-          box.style.display = 'block';
-        }}
+    for (let i = 1; i <= 15; i++) {{
+      const box = document.getElementById(`multi-box-${{i}}`);
+      if (box) {{
+        box.style.display = 'block';
       }}
     }}
-  </script>
+
+    // Enable mouse tracking to move the net
+    document.querySelector(".container").addEventListener("mousemove", function(event) {{
+      const net = document.getElementById("net");
+      const rect = this.getBoundingClientRect();
+      const x = event.clientX - rect.left - net.offsetWidth / 2;
+      const y = event.clientY - rect.top - net.offsetHeight / 2;
+      net.style.left = x + "px";
+      net.style.top = y + "px";
+    }});
+  }}
+</script>
+
 </body>
 </html>
 """
+
 
 
 # Streamlit content
