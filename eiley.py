@@ -16,12 +16,14 @@ def get_base64_image(image_path):
 image_path_1 = "1.png"  # Path to the first image (initial image)
 image_path_2 = "2.png"  # Path to the second image (image that replaces the first one)
 net_image_path = "net.png"
+cat_image_path = "cleaningcat.png"
 
 
 # Encode the images to base64 strings.
 encoded_image_1 = get_base64_image(image_path_1)
 encoded_image_2 = get_base64_image(image_path_2)
 encoded_net = get_base64_image(net_image_path)
+encoded_cat = get_base64_image(cat_image_path)
 
 html_code = f"""
 <!DOCTYPE html>
@@ -46,12 +48,17 @@ html_code = f"""
       display: block;
     }}
     #net {{
-  position: absolute;
-  width: 60px;
-  display: none;
-  z-index: 2;
-  pointer-events: none;  /* So it doesn't block clicks */
-}}
+      position: absolute;
+      width: 60px;
+      display: none;
+      z-index: 2;
+      pointer-events: none;
+    }}
+    .cleaningcat {{
+      position: absolute;
+      width: 50px;
+      z-index: 3;
+    }}
     /* Clickable boxes */
     #multi-box-1 {{ top: 80px; left: 240px; width: 20px; height: 55px; }}
     #multi-box-2 {{ top: 260px; left: 320px; width: 50px; height: 30px; }}
@@ -71,60 +78,82 @@ html_code = f"""
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" id="container">
     <img id="image" src="data:image/png;base64,{encoded_image_1}" width="600" alt="Clickable Image">
     <img id="net" src="data:image/png;base64,{encoded_net}" alt="Net Image">
-    
+
     <!-- First box to change image -->
     <div class="clickable-area" id="clickable-area" onclick="changeImage()"></div>
 
     <!-- All clickable boxes -->
-    <div class="clickable-area" id="multi-box-1" onclick="alert('Box 1 clicked!')"></div>
-    <div class="clickable-area" id="multi-box-2" onclick="alert('Box 2 clicked!')"></div>
-    <div class="clickable-area" id="multi-box-3" onclick="alert('Box 3 clicked!')"></div>
-    <div class="clickable-area" id="multi-box-4" onclick="alert('Box 4 clicked!')"></div>
-    <div class="clickable-area" id="multi-box-5" onclick="alert('Box 5 clicked!')"></div>
-    <div class="clickable-area" id="multi-box-6" onclick="alert('Box 6 clicked!')"></div>
-    <div class="clickable-area" id="multi-box-7" onclick="alert('Box 7 clicked!')"></div>
-    <div class="clickable-area" id="multi-box-8" onclick="alert('Box 8 clicked!')"></div>
-    <div class="clickable-area" id="multi-box-9" onclick="alert('Box 9 clicked!')"></div>
-    <div class="clickable-area" id="multi-box-10" onclick="alert('Box 10 clicked!')"></div>
-    <div class="clickable-area" id="multi-box-11" onclick="alert('Box 11 clicked!')"></div>
-    <div class="clickable-area" id="multi-box-12" onclick="alert('Box 12 clicked!')"></div>
-    <div class="clickable-area" id="multi-box-13" onclick="alert('Box 13 clicked!')"></div>
-    <div class="clickable-area" id="multi-box-14" onclick="alert('Box 14 clicked!')"></div>
-    <div class="clickable-area" id="multi-box-15" onclick="alert('Box 15 clicked!')"></div>
+    <div class="clickable-area" id="multi-box-1" onclick="showCleaningCat(event)"></div>
+    <div class="clickable-area" id="multi-box-2" onclick="alert('Fish!')"></div>
+    <div class="clickable-area" id="multi-box-3" onclick="showCleaningCat(event)"></div>
+    <div class="clickable-area" id="multi-box-4" onclick="alert('Fish!')"></div>
+    <div class="clickable-area" id="multi-box-5" onclick="alert('Fish!')"></div>
+    <div class="clickable-area" id="multi-box-6" onclick="showCleaningCat(event)"></div>
+    <div class="clickable-area" id="multi-box-7" onclick="showCleaningCat(event)"></div>
+    <div class="clickable-area" id="multi-box-8" onclick="alert('Fish!')"></div>
+    <div class="clickable-area" id="multi-box-9" onclick="alert('Fish!')"></div>
+    <div class="clickable-area" id="multi-box-10" onclick="alert('Fish!')"></div>
+    <div class="clickable-area" id="multi-box-11" onclick="showCleaningCat(event)"></div>
+    <div class="clickable-area" id="multi-box-12" onclick="showCleaningCat(event)"></div>
+    <div class="clickable-area" id="multi-box-13" onclick="showCleaningCat(event)"></div>
+    <div class="clickable-area" id="multi-box-14" onclick="showCleaningCat(event)"></div>
+    <div class="clickable-area" id="multi-box-15" onclick="showCleaningCat(event)"></div>
   </div>
 
   <script>
-  function changeImage() {{
-    document.getElementById('image').src = "data:image/png;base64,{encoded_image_2}";
-    document.getElementById('clickable-area').style.display = 'none';
-    document.getElementById('net').style.display = 'block';
+    const cleaningCatImg = "data:image/png;base64,{encoded_cat}";
 
-    for (let i = 1; i <= 15; i++) {{
-      const box = document.getElementById(`multi-box-${{i}}`);
-      if (box) {{
-        box.style.display = 'block';
+    function changeImage() {{
+      document.getElementById('image').src = "data:image/png;base64,{encoded_image_2}";
+      document.getElementById('clickable-area').style.display = 'none';
+      document.getElementById('net').style.display = 'block';
+
+      for (let i = 1; i <= 15; i++) {{
+        const box = document.getElementById(`multi-box-${{i}}`);
+        if (box) {{
+          box.style.display = 'block';
+        }}
       }}
+
+      document.querySelector(".container").addEventListener("mousemove", function(event) {{
+        const net = document.getElementById("net");
+        const rect = this.getBoundingClientRect();
+        const x = event.clientX - rect.left - net.offsetWidth / 2;
+        const y = event.clientY - rect.top - net.offsetHeight / 2;
+        net.style.left = x + "px";
+        net.style.top = y + "px";
+      }});
     }}
 
-    // Enable mouse tracking to move the net
-    document.querySelector(".container").addEventListener("mousemove", function(event) {{
-      const net = document.getElementById("net");
-      const rect = this.getBoundingClientRect();
-      const x = event.clientX - rect.left - net.offsetWidth / 2;
-      const y = event.clientY - rect.top - net.offsetHeight / 2;
-      net.style.left = x + "px";
-      net.style.top = y + "px";
-    }});
-  }}
-</script>
+    function showCleaningCat(event) {{
+  const box = event.target;
+
+  // 이미 고양이를 생성했다면 더 이상 생성하지 않음
+  if (box.dataset.cleaned === "true") return;
+
+  box.dataset.cleaned = "true";  // 이 박스는 이제 cleaned 상태라고 표시
+
+  const rect = document.querySelector(".container").getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  const img = document.createElement("img");
+  img.src = cleaningCatImg;
+  img.className = "cleaningcat";
+  img.style.left = (x - 25) + "px";
+  img.style.top = (y - 25) + "px";
+
+  document.getElementById("container").appendChild(img);
+}}
+
+  </script>
 
 </body>
 </html>
 """
-
 
 
 # Streamlit content
