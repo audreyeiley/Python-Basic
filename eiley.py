@@ -17,6 +17,7 @@ image_path_1 = "1.png"  # Path to the first image (initial image)
 image_path_2 = "2.png"  # Path to the second image (image that replaces the first one)
 net_image_path = "net.png"
 cat_image_path = "cleaningcat.png"
+background_image_path = "5.png"
 
 
 # Encode the images to base64 strings.
@@ -24,6 +25,7 @@ encoded_image_1 = get_base64_image(image_path_1)
 encoded_image_2 = get_base64_image(image_path_2)
 encoded_net = get_base64_image(net_image_path)
 encoded_cat = get_base64_image(cat_image_path)
+encoded_background = get_base64_image(background_image_path)
 
 html_code = f"""
 <!DOCTYPE html>
@@ -59,6 +61,9 @@ html_code = f"""
       width: 50px;
       z-index: 3;
     }}
+    #image {{
+      width: 600px;
+    }}
     /* Clickable boxes */
     #multi-box-1 {{ top: 80px; left: 240px; width: 20px; height: 55px; }}
     #multi-box-2 {{ top: 260px; left: 320px; width: 50px; height: 30px; }}
@@ -79,23 +84,23 @@ html_code = f"""
 </head>
 <body>
   <div class="container" id="container">
-    <img id="image" src="data:image/png;base64,{encoded_image_1}" width="600" alt="Clickable Image">
+    <img id="image" src="data:image/png;base64,{encoded_image_1}" alt="Clickable Image">
     <img id="net" src="data:image/png;base64,{encoded_net}" alt="Net Image">
 
     <!-- First box to change image -->
     <div class="clickable-area" id="clickable-area" onclick="changeImage()"></div>
 
-    <!-- All clickable boxes -->
+    <!-- Clickable boxes -->
     <div class="clickable-area" id="multi-box-1" onclick="showCleaningCat(event)"></div>
-    <div class="clickable-area" id="multi-box-2" onclick="alert('Fish!')"></div>
+    <div class="clickable-area" id="multi-box-2" onclick="handleFishClick()"></div>
     <div class="clickable-area" id="multi-box-3" onclick="showCleaningCat(event)"></div>
-    <div class="clickable-area" id="multi-box-4" onclick="alert('Fish!')"></div>
-    <div class="clickable-area" id="multi-box-5" onclick="alert('Fish!')"></div>
+    <div class="clickable-area" id="multi-box-4" onclick="handleFishClick()"></div>
+    <div class="clickable-area" id="multi-box-5" onclick="handleFishClick()"></div>
     <div class="clickable-area" id="multi-box-6" onclick="showCleaningCat(event)"></div>
     <div class="clickable-area" id="multi-box-7" onclick="showCleaningCat(event)"></div>
-    <div class="clickable-area" id="multi-box-8" onclick="alert('Fish!')"></div>
-    <div class="clickable-area" id="multi-box-9" onclick="alert('Fish!')"></div>
-    <div class="clickable-area" id="multi-box-10" onclick="alert('Fish!')"></div>
+    <div class="clickable-area" id="multi-box-8" onclick="handleFishClick()"></div>
+    <div class="clickable-area" id="multi-box-9" onclick="handleFishClick()"></div>
+    <div class="clickable-area" id="multi-box-10" onclick="handleFishClick()"></div>
     <div class="clickable-area" id="multi-box-11" onclick="showCleaningCat(event)"></div>
     <div class="clickable-area" id="multi-box-12" onclick="showCleaningCat(event)"></div>
     <div class="clickable-area" id="multi-box-13" onclick="showCleaningCat(event)"></div>
@@ -105,6 +110,7 @@ html_code = f"""
 
   <script>
     const cleaningCatImg = "data:image/png;base64,{encoded_cat}";
+    const gameOverImg = "data:image/png;base64,{encoded_background}";
 
     function changeImage() {{
       document.getElementById('image').src = "data:image/png;base64,{encoded_image_2}";
@@ -129,28 +135,41 @@ html_code = f"""
     }}
 
     function showCleaningCat(event) {{
-  const box = event.target;
+      const box = event.target;
+      if (box.dataset.cleaned === "true") return;
+      box.dataset.cleaned = "true";
 
-  // 이미 고양이를 생성했다면 더 이상 생성하지 않음
-  if (box.dataset.cleaned === "true") return;
+      const rect = document.querySelector(".container").getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
 
-  box.dataset.cleaned = "true";  // 이 박스는 이제 cleaned 상태라고 표시
+      const img = document.createElement("img");
+      img.src = cleaningCatImg;
+      img.className = "cleaningcat";
+      img.style.left = (x - 25) + "px";
+      img.style.top = (y - 25) + "px";
 
-  const rect = document.querySelector(".container").getBoundingClientRect();
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
+      document.getElementById("container").appendChild(img);
+    }}
 
-  const img = document.createElement("img");
-  img.src = cleaningCatImg;
-  img.className = "cleaningcat";
-  img.style.left = (x - 25) + "px";
-  img.style.top = (y - 25) + "px";
+    function handleFishClick() {{
+      // Change background image to 5.png (game over)
+      document.getElementById('image').src = gameOverImg;
 
-  document.getElementById("container").appendChild(img);
-}}
+      // Hide all clickable boxes
+      for (let i = 1; i <= 15; i++) {{
+        const box = document.getElementById(`multi-box-${{i}}`);
+        if (box) {{
+          box.style.display = 'none';
+        }}
+      }}
+
+      // Remove all .cleaningcat images
+      const cats = document.querySelectorAll('.cleaningcat');
+      cats.forEach(cat => cat.remove());
+    }}
 
   </script>
-
 </body>
 </html>
 """
@@ -162,7 +181,7 @@ st.title("Catching trash")
 st.write("""
 This game is about catching pollution/trash from the ocean. 
 It's like a fishing game—you need to use your rod to catch trash while avoiding fish.
-The levels get harder as you progress. If you catch a fish, it's game over! Catch more trash to upgrade your rod.
+And if you catch a fish its game over!
 """)
 
 # Render the HTML game in Streamlit
