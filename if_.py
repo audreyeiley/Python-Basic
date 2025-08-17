@@ -98,22 +98,7 @@
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
 
-# print("Enter two numbers")
-# number1 = int(input())
-# number2 = int(input())
 
-# print("What calculation would you like to run?") 
-# print("1: Multiply, 2: Divide, 3: Add, 4: subtract ")
-# number3 = int(input())
-
-# if(number3 == 1 ) :
-#     print("selected multiply,", number1, "*", number2, "=", number1*number2)
-# elif(number3 == 2) :
-#     print("selected divide,", number1, "/", number2, "=", number1//number2)
-# elif(number3 == 3) :
-#     print("selected add,", number1, "+", number2, "=", number1+number2) 
-# elif(number3 ==3 ) :
-#     print("selected subtract,", number1, "-", number2, "-", number1-number2)
 
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
